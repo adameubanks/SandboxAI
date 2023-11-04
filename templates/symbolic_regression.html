@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Symbolic Regression{% endblock %}
+{% block content %}
+<h3>Your Equation:</h3>
+<p>{{equation}}</p>
+<h3>Accuracy:</h3>
+<div class="row">
+    <div class="col"><p>R<sup>2</sup> Score: {{r_score}}</p></div>
+    <div class="col"><p>Mean Squared Error: {{mse}}</p></div>
+</div>
+<img src="{{ image }}"/>
+{% endblock %}

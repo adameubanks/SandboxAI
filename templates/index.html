@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1>Welcome to SandboxAI!</h1>
+<h3>Upload your dataset to begin the fun</h3>
+<form method = "POST" enctype="multipart/form-data" action = "/">   
+    <input type="file" name="file" accept=".csv" class="form-control">
+    <br>
+    <input type = "submit" value="Upload" class="btn btn-primary"> 
+</form>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Feature Importance{% endblock %}
+{% block content %}
+<h1>Top 10 Features for {{y_var}}</h1>
+<p>According to <a href="https://www.geeksforgeeks.org/ml-chi-square-test-for-feature-selection/#" style="text-decoration: none;">χ<sup>2</sup></a> test.</p>
+{{ selected_features|safe }}
+{% endblock %}

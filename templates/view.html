@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block title %}View{% endblock %}
+{% block content %}
+<h1>Your dataset:</h1>
+<div style="overflow: auto; max-height: 400px;">
+    {{ dataset|safe }}
+</div>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form data-toggle="modal" data-target="#selectY">
+                <input class="btn btn-primary" value="Feature Importance"/>
+            </form>
+        </div>
+        <div class="col">
+            <form action="/symbolic_regression/choose_features">
+                <input type="submit" class="btn btn-primary" value="Symbolic Regression"/>
+            </form>
+        </div>
+        <div class="w-100">Choose your action</div>
+        <div class="col">
+            <form data-toggle="modal" data-target="#selectYXGBoost">
+                <input class="btn btn-primary" value="Blackbox Model"/>
+            </form>
+        </div>
+        <div class="col">
+            <form action="/correlation_matrix/results">
+                <input type="submit" class="btn btn-primary" value="Correlation Matrix"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Choose Y for Feature Selection Modal -->
+<div class="modal fade" id="selectY" tabindex="-1" role="dialog" aria-labelledby="selectYLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <form action="/feature_importance/results/", method="POST">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="selectYLabel">Choose Y Variable</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <select class="form-select" aria-label="Choose Y Variable" name="y_var">
+            {%for y in features%}
+                <option>{{y}}</option>
+            {%endfor%}
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </div>
+    </form>
+</div>
+</div>
+
+<!-- Choose Y for XGBoost Modal -->
+<div class="modal fade" id="selectYXGBoost" tabindex="-1" role="dialog" aria-labelledby="selectYXGBoostLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <form action="/blackbox/results/", method="POST">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="selectYXGBoostLabel">Choose Y Variable</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <select class="form-select" aria-label="Choose Y Variable" name="y_var">
+            {%for y in features%}
+                <option>{{y}}</option>
+            {%endfor%}
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </div>
+    </form>
+</div>
+</div>
+{% endblock %}

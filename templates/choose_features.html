@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block title %}Choose Features{% endblock %}
+{% block content %}
+{%if alert%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Please make sure you have selected input variables that aren't the same as your output variable
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{%endif%}
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">See Dataset</button>
+<div class="collapse" id="collapseExample">
+    <br>
+    <div class="card card-body">
+        <div style="overflow: auto; max-height: 400px;">
+            {{ dataset|safe }}
+        </div>
+    </div>
+</div>
+<br>
+<h1>Choose the features you want to use in your equation:</h1>
+<form action="/symbolic_regression/results/", method="POST">
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {%for i in features%}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckChecked" name="features" checked>
+                    <label class="form-check-label" for="flexCheckChecked">{{i}}</label>
+                </div>
+            {%endfor%}
+        </div>
+        <div class="col">
+            {%for j in squared_features%}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{j}}" id="flexCheckDefault" name="features">
+                    <label class="form-check-label" for="flexCheckDefault">{{j}}</label>
+                </div>
+            {%endfor%}
+        </div>
+        <div class="col">
+            {%for k in inverse_features%}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{k}}" id="flexCheckDefault" name="features">
+                    <label class="form-check-label" for="flexCheckDefault">{{k}}</label>
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+<br>
+<p>Choose Y Variable:</p>
+<select class="form-select" aria-label="Choose Y Variable" name="y_var">
+    {%for y in features%}
+        <option>{{y}}</option>
+    {%endfor%}
+</select>
+<br>
+<input type="submit" class="btn btn-primary" value="Generate My Model"/>
+</form>
+<br>
+{{extra_features}}
+{% endblock %}
