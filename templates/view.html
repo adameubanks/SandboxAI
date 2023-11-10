@@ -1,12 +1,33 @@
 {% extends "layout.html" %}
 {% block title %}View{% endblock %}
 {% block content %}
-<h1>Your dataset:</h1>
+<h1>Your Cleaned Dataset 
+    <a class="icon-link" href="#"><sup>
+        <i class="bi bi-info-circle" data-toggle="modal" data-target="#infoDataCleaning" style="font-size:24px;"></i>
+    </sup></a></h1>
 <div style="overflow: auto; max-height: 400px;">
     {{ dataset|safe }}
 </div>
 <br>
 
+<!--Modal explaining data cleaning-->
+<div class="modal fade" id="infoDataCleaning" tabindex="-1" role="dialog" aria-labelledby="infoCleaningData" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoCleaningData">Data Cleaning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Before uploading your dataset, SandboxAI will remove empty any non-numerical values. 
+                If you wish to use non-numerical features or feel that SandboxAI has removed too many datapoints from your dataset, 
+                make sure to one-hot-encode the non-numerical features you wish to explore.
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col">
