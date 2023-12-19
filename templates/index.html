@@ -1,12 +1,34 @@
 {% extends "layout.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1>Welcome to SandboxAI!</h1>
+<h1>It's Time to Democratize AI</h1>
 <h3>Upload your dataset to begin the fun</h3>
 <form method = "POST" enctype="multipart/form-data" action = "/">   
     <input type="file" name="file" accept=".csv" class="form-control">
-    <p align="right">*only .csv format supported</p>
+    <p align="right">
+        *only .csv files supported<br>
+        <a data-toggle="modal" data-target="#howItWorks" class="icon-link" href="#">Learn how it works</a>
+    </p>
     <br>
     <input type = "submit" value="Upload" class="btn btn-primary"> 
 </form>
+<div class="modal fade" id="howItWorks" tabindex="-1" role="dialog" aria-labelledby="howItWorksData" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="howItWorksData">How it works</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                SandboxAI takes your sequential data and uses it to form machine-learning driven conclusions. 
+                For more info on how each algorithm works, make sure to click the info (<i class="bi bi-info-circle"></i>) icons.
+                Before uploading your dataset, SandboxAI will remove empty any non-numerical values. 
+                If you wish to use non-numerical features or feel that SandboxAI has removed too many datapoints from your dataset, 
+                make sure to one-hot-encode the non-numerical features you wish to explore.
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
