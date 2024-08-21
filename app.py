@@ -28,13 +28,17 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 def uploadFile():
     if request.method == 'POST':
         f = request.files.get('file')
-
-        data_filename = secure_filename(f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], data_filename))
-        session['uploaded_data_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], data_filename)
-
-        return redirect(url_for("view"))
+        if f:
+            data_filename = secure_filename(f.filename)
+            upload_folder = app.config['UPLOAD_FOLDER']
+            # Ensure the directory exists
+            if not os.path.exists(upload_folder):
+                os.makedirs(upload_folder)
+            f.save(os.path.join(upload_folder, data_filename))
+            session['uploaded_data_file_path'] = os.path.join(upload_folder, data_filename)
+            return redirect(url_for("view"))
     return render_template("index.html")
+
 
 @app.route('/view/')
 def view():

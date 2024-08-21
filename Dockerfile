@@ -13,3 +13,6 @@ ENV FLASK_APP=app.py
 EXPOSE 5000
 
 CMD ["flask", "run", "--host=0.0.0.0"]
+
+# docker build -t sandboxai .
+# docker run -p 5000:5000 sandboxai
