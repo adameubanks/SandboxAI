@@ -9,7 +9,7 @@ import blackbox
 import os
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
-# MODEL_FOLDER = os.path.join('static', 'models')
+MODEL_FOLDER = os.path.join('static', 'models')
 ALLOWED_EXTENSIONS = {'csv'}
 
 app = Flask(__name__)
